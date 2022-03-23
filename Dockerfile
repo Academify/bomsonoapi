@@ -4,4 +4,4 @@ WORKDIR /usr/app
 
 RUN npm install
 
-CMD [-d "node_modules" ] && npm start || npm ci && npm start
+CMD [ -d "node_modules" ] && npm start || npm ci && npm start
