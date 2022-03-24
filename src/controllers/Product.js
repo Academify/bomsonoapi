@@ -29,7 +29,7 @@ module.exports = {
     },
 
     async post(req, res) {
-        const {name, price} = req.query;
+        const {name, price} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`INSERT INTO thia1892_bomsono.Product (name, price) VALUES (?,?)`, [name, price]);

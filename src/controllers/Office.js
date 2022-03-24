@@ -5,7 +5,7 @@ module.exports = {
         const {id} = req.query;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`SELECT * FROM thia1892_bomsono.Invoice WHERE invoice_id=${id}`);        
+            var rows = await connection.query(`SELECT * FROM thia1892_bomsono.Office WHERE office_id=${id}`);        
         } catch(err) {
             var rows = "failed!";
         }
@@ -18,7 +18,7 @@ module.exports = {
     async getAll(req, res) {
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query('SELECT * FROM thia1892_bomsono.Invoice');        
+            var rows = await connection.query('SELECT * FROM thia1892_bomsono.Office');        
         } catch(err) {
             var rows = "failed!";
         }
@@ -29,10 +29,10 @@ module.exports = {
     },
 
     async post(req, res) {
-        const {payment_method, total, date} = req.query;
+        const {name, wage} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`INSERT INTO thia1892_bomsono.Invoice (payment_method, total, date) VALUES (?,?,?)`, [payment_method, total, date]);
+            var rows = await connection.query(`INSERT INTO thia1892_bomsono.Office (name, wage) VALUES (?,?)`, [name, wage]);
         } catch(err) {
             var rows = "failed!";
         }
@@ -42,11 +42,14 @@ module.exports = {
         res.json("Worked!");
     },
 
-    /*async patch(req, res) {
-        const {id, name, price} = req.query;
+    async patch(req, res) {
+        const {id} = req.query;
+        const {name, wage} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`UPDATE thia1892_bomsono.Product SET Nome_Livro = 'SSH, o Shell Seguro' WHERE ID_LIVRO = 101;`, [name, price]);
+            var rows = await connection.query(
+                `UPDATE thia1892_bomsono.Office SET name = '${name}', wage = ${wage} WHERE office_id = ${id};`
+            );
         } catch(err) {
             var rows = "failed!";
         }
@@ -54,13 +57,13 @@ module.exports = {
         connection.destroy();
         
         res.json("Worked!");
-    },*/
+    },
 
     async delete(req, res) {
         const {id} = req.query;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`DELETE FROM thia1892_bomsono.Invoice WHERE invoice_id=${id}`);        
+            var rows = await connection.query(`DELETE FROM thia1892_bomsono.Office WHERE office_id=${id}`);        
         } catch(err) {
             var rows = "failed!";
         }

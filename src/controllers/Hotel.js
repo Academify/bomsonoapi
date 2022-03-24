@@ -29,7 +29,7 @@ module.exports = {
     },
 
     async post(req, res) {
-        const {city, state} = req.query;
+        const {city, state} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`INSERT INTO thia1892_bomsono.Hotel (city, state) VALUES (?,?)`, [city, state]);

@@ -29,7 +29,7 @@ module.exports = {
     },
 
     async post(req, res) {
-        const {payment_method, total, date} = req.query;
+        const {payment_method, total, date} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`INSERT INTO thia1892_bomsono.Invoice (payment_method, total, date) VALUES (?,?,?)`, [payment_method, total, date]);
