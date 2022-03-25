@@ -1,6 +1,9 @@
 const {Router} = require('express');
 
 const address = require('./controllers/Address');
+const booking = require('./controllers/Booking');
+const client = require('./controllers/Client');
+const consumption = require('./controllers/Consumption');
 const hotel = require('./controllers/Hotel');
 const invoice = require('./controllers/Invoice');
 const office = require('./controllers/Office');
@@ -17,6 +20,27 @@ routes.get('/address', address.getByID);
 routes.post('/address', address.post);
 routes.delete('/address', address.delete);
 //routes.patch('/address', address.patch); // TIRAR DÚVIDA
+
+// CRUD Booking
+routes.get('/all-bookings', booking.getAll);
+routes.get('/booking', booking.getByID);
+routes.post('/booking', booking.post);
+routes.delete('/booking', booking.delete);
+//routes.patch('/booking', booking.patch); // TIRAR DÚVIDA
+
+// CRUD Client
+routes.get('/all-clients', client.getAll);
+routes.get('/client', client.getByID);
+routes.post('/client', client.post);
+routes.delete('/client', client.delete);
+//routes.patch('/client', client.patch); // TIRAR DÚVIDA
+
+// CRUD Consumption
+routes.get('/all-consumptions', consumption.getAll);
+routes.get('/consumption', consumption.getByID);
+routes.post('/consumption', consumption.post);
+routes.delete('/consumption', consumption.delete);
+//routes.patch('/consumption', consumption.patch); // TIRAR DÚVIDA
 
 // CRUD Hotel
 routes.get('/all-hotels', hotel.getAll);
