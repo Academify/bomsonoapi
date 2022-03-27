@@ -9,6 +9,7 @@ const invoice = require('./controllers/Invoice');
 const office = require('./controllers/Office');
 const product = require('./controllers/Product');
 const room_type = require('./controllers/Room_Type');
+const jugurta = require('./controllers/Jugurta');
 
 const routes = Router();
 
@@ -77,5 +78,8 @@ routes.post('/room-type', room_type.post);
 routes.delete('/room-type', room_type.delete);
 //routes.patch('/room-type', room_type.patch); // TIRAR DÚVIDA
 
+
+//Requisições obrigatórias do Projeto
+routes.get('/queryA', jugurta.queryA);
 
 module.exports = routes;

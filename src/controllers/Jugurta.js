@@ -11,12 +11,12 @@ module.exports = {
       var checkin = "2022-02-26";
       var checkout = "2022-03-01";
       var rows = await connection.query(
-        `SELECT name FROM thia1892_bomsono.Client as C, thia1892_bomsono.Booking as B,thia1892_bomsono.Accommodation as A  WHERE client_id=${id}`
+        `SELECT C.name FROM thia1892_bomsono.Client as C, thia1892_bomsono.Booking as B,thia1892_bomsono.Accommodation as A  WHERE C.client_id=B.client and A.booking=B.booking_id and A.check_in_date > ${checkin} and A.check_out_date < ${checkout} `
       );
     } catch (err) {
       var rows = err;
     }
     connection.destroy();
-    return res.json();
+    res.json(rows);
   },
 };
