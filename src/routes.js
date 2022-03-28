@@ -32,7 +32,7 @@ routes.get('/all-accommodations', accommodation.getAll);
 routes.get('/accommodation', accommodation.getByID);
 routes.post('/accommodation', accommodation.post);
 routes.delete('/accommodation', accommodation.delete);
-//routes.patch('/accommodation', accommodation.patch); // TIRAR DÚVIDA
+routes.patch('/accommodation', accommodation.patch); // TIRAR DÚVIDA
 
 // CRUD Booking
 routes.get('/all-bookings', booking.getAll);

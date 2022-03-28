@@ -48,7 +48,9 @@ module.exports = {
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(
-                `UPDATE thia1892_bomsono.Office SET name = '${name}', wage = ${wage} WHERE office_id = ${id};`
+                `UPDATE thia1892_bomsono.Office 
+                SET name = '${name}', wage = ${wage} 
+                WHERE office_id = ${id};`
             );
         } catch(err) {
             var rows = "failed!";

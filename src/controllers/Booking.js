@@ -13,7 +13,7 @@ module.exports = {
         `SELECT * FROM thia1892_bomsono.Booking WHERE booking_id=${id}`
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
@@ -32,7 +32,7 @@ module.exports = {
         "SELECT * FROM thia1892_bomsono.Booking"
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
@@ -54,27 +54,37 @@ module.exports = {
         [number_people, start_date, end_date, client, booked_room_type]
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
 
-    res.json("Worked!");
+    res.json(rows);
   },
 
-  /*async patch(req, res) {
-        const {id, name, price} = req.query;
-        try {
-            var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`UPDATE thia1892_bomsono.Product SET Nome_Livro = 'SSH, o Shell Seguro' WHERE ID_LIVRO = 101;`, [name, price]);
-        } catch(err) {
-            var rows = "failed!";
-        }
+  async patch(req, res) {
+    const { id } = req.query;
+    const { number_people, start_date, end_date, client, booked_room_type } =
+      req.body;
+    try {
+      var connection = await mariadb.createConnection({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+      });
+      var rows = await connection.query(
+        `UPDATE thia1892_bomsono.Booking 
+        SET number_people =${number_people}, start_date = ${start_date}, end_date = ${end_date}, client=${client}, booked_room_type=${booked_room_type}
+        WHERE booking_id = ${id};`,
+      );
+    } catch (err) {
+      var rows = err;
+    }
 
-        connection.destroy();
-        
-        res.json("Worked!");
-    },*/
+    connection.destroy();
+
+    res.json(rows);
+  },
 
   async delete(req, res) {
     const { id } = req.query;
@@ -88,11 +98,11 @@ module.exports = {
         `DELETE FROM thia1892_bomsono.Booking WHERE booking_id=${id}`
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
 
-    res.json("Deleted!");
+    res.json(rows);
   },
 };

@@ -61,19 +61,28 @@ module.exports = {
     res.json(rows);
   },
 
-  /*async patch(req, res) {
-        const {id, name, price} = req.query;
-        try {
-            var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
-            var rows = await connection.query(`UPDATE thia1892_bomsono.Product SET Nome_Livro = 'SSH, o Shell Seguro' WHERE ID_LIVRO = 101;`, [name, price]);
-        } catch(err) {
-            var rows = "failed!";
-        }
+  async patch(req, res) {
+    const { id } = req.query;
+    const { check_in_date, check_out_date, booking, room } = req.body;
+    try {
+      var connection = await mariadb.createConnection({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+      });
+      var rows = await connection.query(
+        `UPDATE thia1892_bomsono.Accommodation 
+        SET check_in_date = ${check_in_date}, check_out_date = ${check_out_date}, booking = ${booking}, room =${room}
+        WHERE acc_id = ${id};`,
+      );
+    } catch (err) {
+      var rows = "failed!";
+    }
 
-        connection.destroy();
-        
-        res.json("Worked!");
-    },*/
+    connection.destroy();
+
+    res.json("Worked!");
+  },
 
   async delete(req, res) {
     const { id } = req.query;
