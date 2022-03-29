@@ -7,7 +7,7 @@ module.exports = {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`SELECT * FROM thia1892_bomsono.Office WHERE office_id=${id}`);        
         } catch(err) {
-            var rows = "failed!";
+            var rows = err;
         }
 
         connection.destroy();
@@ -20,7 +20,7 @@ module.exports = {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query('SELECT * FROM thia1892_bomsono.Office');        
         } catch(err) {
-            var rows = "failed!";
+            var rows = err;
         }
 
         connection.destroy();
@@ -34,12 +34,12 @@ module.exports = {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`INSERT INTO thia1892_bomsono.Office (name, wage) VALUES (?,?)`, [name, wage]);
         } catch(err) {
-            var rows = "failed!";
+            var rows = err;
         }
 
         connection.destroy();
         
-        res.json("Worked!");
+        res.json(rows);
     },
 
     async patch(req, res) {
@@ -53,12 +53,12 @@ module.exports = {
                 WHERE office_id = ${id};`
             );
         } catch(err) {
-            var rows = "failed!";
+            var rows = err;
         }
 
         connection.destroy();
         
-        res.json("Worked!");
+        res.json(rows);
     },
 
     async delete(req, res) {
@@ -67,11 +67,11 @@ module.exports = {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`DELETE FROM thia1892_bomsono.Office WHERE office_id=${id}`);        
         } catch(err) {
-            var rows = "failed!";
+            var rows = err;
         }
 
         connection.destroy();
         
-        res.json("Deleted!");
+        res.json(rows);
     }
 }
