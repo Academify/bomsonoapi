@@ -50,7 +50,7 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        `INSERT INTO thia1892_bomsono.Booking (number_people, start_date, end_date, client, room_type) VALUES (?,?,?,?,?)`,
+        `INSERT INTO thia1892_bomsono.Booking (number_people, start_date, end_date, client, booked_room_type) VALUES (?,?,?,?,?)`,
         [number_people, start_date, end_date, client, booked_room_type]
       );
     } catch (err) {
