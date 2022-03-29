@@ -121,5 +121,8 @@ routes.delete('/room', room.delete);
 
 //Requisições obrigatórias do Projeto
 routes.get('/queryA', jugurta.queryA);
+routes.get('/queryB', jugurta.queryB)
+routes.get('/queryC', jugurta.queryC)
+routes.get('/queryQ', jugurta.queryQ)
 
 module.exports = routes;

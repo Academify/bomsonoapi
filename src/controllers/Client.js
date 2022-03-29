@@ -41,7 +41,7 @@ module.exports = {
   },
 
   async post(req, res) {
-    const { name, email, phone, password, nationality, addr } = req.body;
+    const { client_name, email, phone, password, nationality, addr } = req.body;
     try {
       var connection = await mariadb.createConnection({
         host: process.env.HOST,
@@ -49,8 +49,8 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        `INSERT INTO thia1892_bomsono.Client (name, email, phone, password, nationality, addr) VALUES (?,?,?,?,?,?)`,
-        [name, email, phone, password, nationality, addr]
+        `INSERT INTO thia1892_bomsono.Client (client_name, email, phone, password, nationality, addr) VALUES (?,?,?,?,?,?)`,
+        [client_name, email, phone, password, nationality, addr]
       );
     } catch (err) {
       var rows = err;
@@ -63,7 +63,7 @@ module.exports = {
 
   async patch(req, res) {
     const { id } = req.query;
-    const { name, email, phone, password, nationality, addr } = req.body;
+    const { client_name, email, phone, password, nationality, addr } = req.body;
 
     try {
       var connection = await mariadb.createConnection({
@@ -73,7 +73,7 @@ module.exports = {
       });
       var rows = await connection.query(
         `UPDATE thia1892_bomsono.Client
-         SET name = ${name}, email = ${email}, phone = ${phone}, password = ${password}, nationality =${nationality}, addr = ${addr}
+         SET client_name = ${client_name}, email = ${email}, phone = ${phone}, password = ${password}, nationality =${nationality}, addr = ${addr}
          WHERE client_id = ${id};`,
       );
     } catch (err) {

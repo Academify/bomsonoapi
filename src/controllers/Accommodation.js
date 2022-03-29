@@ -13,7 +13,7 @@ module.exports = {
         `SELECT * FROM thia1892_bomsono.Accommodation WHERE acc_id=${id}`
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
@@ -32,7 +32,7 @@ module.exports = {
         "SELECT * FROM thia1892_bomsono.Accommodation"
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
@@ -76,12 +76,12 @@ module.exports = {
         WHERE acc_id = ${id};`,
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
 
-    res.json("Worked!");
+    res.json(rows);
   },
 
   async delete(req, res) {
@@ -96,11 +96,11 @@ module.exports = {
         `DELETE FROM thia1892_bomsono.Accommodation WHERE acc_id=${id}`
       );
     } catch (err) {
-      var rows = "failed!";
+      var rows = err;
     }
 
     connection.destroy();
 
-    res.json("Deleted!");
+    res.json(rows);
   },
 };
