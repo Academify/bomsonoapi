@@ -81,7 +81,8 @@ routes.get('/all-invoices', invoice.getAll);
 routes.get('/invoice', invoice.getByID);
 routes.post('/invoice', invoice.post);
 routes.delete('/invoice', invoice.delete);
-//routes.patch('/invoice', invoice.patch); // TIRAR DÚVIDA
+routes.post('/generateInvoice', invoice.generateInvoice);
+// routes.patch('/invoice', invoice.patch);
 
 // CRUD Office
 routes.get('/all-offices', office.getAll);
