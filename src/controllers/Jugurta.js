@@ -68,7 +68,7 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        `SELECT CL.client_name, A.check_in_date, A.check_out_date, RT.daily_price, SUM(@total_price := DATEDIFF(A.check_out_date, A.check_in_date)*RT.daily_price) as total
+        `SELECT CL.client_name, A.check_in_date, SUM(@total_price := DATEDIFF(A.check_out_date, A.check_in_date)*RT.daily_price) as total
         FROM thia1892_bomsono.Client as CL, thia1892_bomsono.Booking as B, thia1892_bomsono.Accommodation as A, thia1892_bomsono.Room_Type as RT
         WHERE CL.client_id = B.client and B.booking_id = A.booking and B.booked_room_type = RT.room_type_id
         GROUP BY CL.client_id
