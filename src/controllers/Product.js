@@ -44,13 +44,12 @@ module.exports = {
 
     async patch(req, res) {
         const {id} = req.query;
-        const {name, price} = req.body;
+        const {name, product_price} = req.body;
         try {
             var connection = await mariadb.createConnection({host: process.env.HOST, user: process.env.USER, password: process.env.PASSWORD});
             var rows = await connection.query(`UPDATE thia1892_bomsono.Product 
-            SET name = ${name}, price = ${price}
-            WHERE product_id = ${id};`, 
-            [name, price]
+            SET name = ${name}, product_price = ${product_price}
+            WHERE product_id = ${id};`
         );
         } catch(err) {
             var rows = err;

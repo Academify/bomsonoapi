@@ -56,8 +56,7 @@ module.exports = {
             var rows = await connection.query(
                 `UPDATE thia1892_bomsono.Hotel 
                 SET city = ${city}, state = ${state}' 
-                WHERE hotel_id = ${id};`, 
-                [city, state]
+                WHERE hotel_id = ${id};`
             );
         } catch(err) {
             var rows = err;

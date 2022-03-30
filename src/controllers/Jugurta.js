@@ -59,6 +59,57 @@ module.exports = {
     res.json(rows);
   },
 
+  async queryD(req, res) {
+    try {
+      var connection = await mariadb.createConnection({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+      });
+      var rows = await connection.query(
+        ``
+      );
+    } catch (err) {
+      var rows = err;
+    }
+    connection.destroy();
+    res.json(rows);
+  },
+
+  async queryE(req, res) {
+    try {
+      var connection = await mariadb.createConnection({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+      });
+      var rows = await connection.query(
+        ``
+      );
+    } catch (err) {
+      var rows = err;
+    }
+    connection.destroy();
+    res.json(rows);
+  },
+
+  async queryF(req, res) {
+    try {
+      var connection = await mariadb.createConnection({
+        host: process.env.HOST,
+        user: process.env.USER,
+        password: process.env.PASSWORD,
+      });
+      var rows = await connection.query(
+        ``
+      );
+    } catch (err) {
+      var rows = err;
+    }
+    connection.destroy();
+    res.json(rows);
+  },
+
   //Liste os clientes mais fieis ao hotel gastaram mais em
   async queryQ(req, res) {
     try {

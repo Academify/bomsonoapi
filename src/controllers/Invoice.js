@@ -50,8 +50,7 @@ module.exports = {
             var rows = await connection.query(`
             UPDATE thia1892_bomsono.Invoice 
             SET payment_method = ${payment_method}, total = ${total}, date = ${date}, accomm = ${accomm}
-            WHERE invoice_id = ${id};`, 
-            [payment_method, total, date, accomm]
+            WHERE invoice_id = ${id};`
         );
         } catch(err) {
             var rows = err;
