@@ -66,7 +66,12 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        ``
+        `SELECT COUNT(R.room_id) as quntity, H.city
+        FROM thia1892_bomsono.Room as R
+                 INNER JOIN thia1892_bomsono.Hotel as H ON R.hotel = H.hotel_id
+                 INNER JOIN thia1892_bomsono.Room_Type as RT ON R.room_type = RT.room_type_id
+        WHERE RT.num_double_bed = 1
+        GROUP BY H.hotel_id;`
       );
     } catch (err) {
       var rows = err;
@@ -83,7 +88,11 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        ``
+        `SELECT C.client_name
+        FROM thia1892_bomsono.Booking as B
+                 INNER JOIN thia1892_bomsono.Client as C on B.client = C.client_id
+        WHERE B.booking_id NOT IN (SELECT A.booking
+                                   FROM thia1892_bomsono.Accommodation as A);`
       );
     } catch (err) {
       var rows = err;
@@ -100,7 +109,15 @@ module.exports = {
         password: process.env.PASSWORD,
       });
       var rows = await connection.query(
-        ``
+        `SELECT H.city, C.client_name
+        FROM thia1892_bomsono.Invoice as I
+                 INNER JOIN thia1892_bomsono.Accommodation A on I.accomm = A.acc_id
+                 INNER JOIN thia1892_bomsono.Booking B on A.booking = B.booking_id
+                 INNER JOIN thia1892_bomsono.Client C on B.client = C.client_id
+                 INNER JOIN thia1892_bomsono.Room R on A.room = R.room_id
+                 INNER JOIN thia1892_bomsono.Hotel H on R.hotel = H.hotel_id
+        ORDER BY I.total
+        LIMIT 5;`
       );
     } catch (err) {
       var rows = err;

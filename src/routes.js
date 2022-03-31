@@ -124,6 +124,9 @@ routes.delete('/room', room.delete);
 routes.get('/queryA', jugurta.queryA);
 routes.get('/queryB', jugurta.queryB)
 routes.get('/queryC', jugurta.queryC)
+routes.get('/queryD', jugurta.queryD)
+routes.get('/queryE', jugurta.queryE)
+routes.get('/queryF', jugurta.queryF)
 routes.get('/queryQ', jugurta.queryQ)
 
 module.exports = routes;
