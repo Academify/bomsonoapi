@@ -63,7 +63,7 @@ module.exports = {
 
   async patch(req, res) {
     const { id } = req.query;
-    const { name, age, cpf, occupation } = req.body;
+    var { name, age, cpf, occupation } = req.body;
 
     try {
       var connection = await mariadb.createConnection({
@@ -71,9 +71,19 @@ module.exports = {
         user: process.env.USER,
         password: process.env.PASSWORD,
       });
+
+      var picked = await connection.query(
+        `SELECT * FROM thia1892_bomsono.Employee WHERE employee_id=${id}`
+      );
+
+      if(!req.body.name) name = picked[0].name;
+      if(!req.body.age) age = picked[0].age;
+      if(!req.body.cpf) cpf = picked[0].cpf;
+      if(!req.body.occupation) occupation = picked[0].occupation;
+
       var rows = await connection.query(
-        `UPDATE thia1892_bomsono.Product 
-        SET  name =${name}, age = ${age}, cpf = ${cpf}, occupation =${occupation}
+        `UPDATE thia1892_bomsono.Employee 
+        SET  name ='${name}', age = ${age}, cpf = '${cpf}', occupation =${occupation}
         WHERE employee_id = ${id};`
       );
     } catch (err) {
